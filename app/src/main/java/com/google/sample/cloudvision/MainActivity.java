@@ -47,7 +47,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
+//import android.widget.VideoView;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
@@ -115,14 +115,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public static String message = "";
     private static boolean Button_State = false;
 
-    private static final String VID1 = "VID_20170714_151823_2";
-    private static final String VID2 = "VID_20170714_152054_2";
+
     private static final String VID3 = "VID_20170714_152406_2";
-    private static final String VID4 = "VID_20170714_152906_2";
-    private static String[] files1;
-    private static String[] files2;
     private static String[] files3;
-    private static String[] files4;
     private static InputStream is;
     private static Bitmap bmp;
 
@@ -145,10 +140,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final AssetManager assetManager = getAssets();
         try {
-            files1 = assetManager.list(VID1);
-            files2 = assetManager.list(VID2);
             files3 = assetManager.list(VID3);
-            files4 = assetManager.list(VID4);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -164,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 is = assetManager.open(VID3 + "/" + files3[Time_CNT]);
                                 bmp = BitmapFactory.decodeStream(is);
                                 mMainImage.setImageBitmap(bmp);
-                                if(Time_CNT % 15 == 0){
+                                if(Time_CNT % 30 == 0){
                                     callCloudVision(bmp,true);
                                 }
                             } catch (IOException e) {
@@ -233,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (!Button_State){
             Button_State = !Button_State;
             mTimer = new Timer();
-            mTimer.schedule(mTask, 0,200);
+            mTimer.schedule(mTask, 0,100);
         }
         else{
             Button_State = !Button_State;
